@@ -1,0 +1,869 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101010">
+<meta name="description" content="Sabor Urbano: hamburguesas, alitas, pizzas y mucho más.">
+<title>Sabor Urbano | Burger & Grill</title>
+
+<style>
+:root {
+  --bg: #101010;
+  --card: #1a1a1a;
+  --orange: #ff9d00;
+  --white: #ffffff;
+  --gray: #b9b9b9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  width: min(1150px, 90%);
+  margin: auto;
+}
+
+/* NAVEGACIÓN */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(15,15,15,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #292929;
+}
+
+nav {
+  min-height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span { color: var(--orange); }
+
+.logo small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--orange);
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: bold;
+  transition: color .2s;
+}
+
+.nav-links a:hover { color: var(--orange); }
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 30px;
+  background: var(--orange);
+  color: #151515;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid var(--orange);
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: #ffb52e;
+}
+
+.btn-outline {
+  color: white;
+  background: transparent;
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  color: white;
+  border: 1px solid #444;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+/* PORTADA */
+
+.hero {
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background:
+    linear-gradient(90deg, #101010 5%, #101010e8 42%, #10101055),
+    url("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+
+.hero-content {
+  max-width: 650px;
+  padding: 85px 0;
+}
+
+.eyebrow {
+  color: var(--orange);
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+h1 {
+  font-size: clamp(45px, 7vw, 82px);
+  line-height: 1;
+  margin: 20px 0;
+  letter-spacing: -3px;
+}
+
+h1 span, .accent { color: var(--orange); }
+
+.hero h2 {
+  font-size: clamp(21px, 3vw, 31px);
+  margin-bottom: 15px;
+}
+
+.hero p {
+  color: #ddd;
+  max-width: 490px;
+  font-size: 15px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.features {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 35px;
+  color: #ddd;
+  font-size: 12px;
+}
+
+.features span::first-letter {
+  color: var(--orange);
+}
+
+/* SECCIONES */
+
+section { padding: 75px 0; }
+
+.section-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-title h2 {
+  font-size: clamp(29px, 4vw, 42px);
+  letter-spacing: -1px;
+}
+
+.section-title p {
+  color: var(--gray);
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* CATEGORÍAS */
+
+.categories { background: #141414; }
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.category {
+  min-height: 145px;
+  display: flex;
+  align-items: flex-end;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid #353535;
+  background: linear-gradient(0deg, #080808 0%, transparent 100%),
+  url("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80") center/cover;
+  transition: .25s;
+  cursor: pointer;
+}
+
+.category:nth-child(2) {
+  background-image: linear-gradient(0deg,#080808,transparent),
+  url("https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=500&q=80");
+}
+
+.category:nth-child(3) {
+  background-image: linear-gradient(0deg,#080808,transparent),
+  url("https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80");
+}
+
+.category:hover {
+  transform: translateY(-5px);
+  border-color: var(--orange);
+}
+
+.category h3 { font-size: 16px; }
+.category p { color: #ccc; font-size: 12px; }
+
+/* MENÚ */
+
+.menu-tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter {
+  padding: 9px 14px;
+  border: 1px solid #383838;
+  background: #191919;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.filter.active, .filter:hover {
+  background: var(--orange);
+  color: #111;
+  border-color: var(--orange);
+}
+
+#search {
+  padding: 12px 15px;
+  border-radius: 25px;
+  border: 1px solid #393939;
+  background: #191919;
+  color: white;
+  outline: none;
+}
+
+#search:focus { border-color: var(--orange); }
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.product {
+  background: var(--card);
+  border: 1px solid #303030;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: .25s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  border-color: #a56a0c;
+}
+
+.product img {
+  width: 100%;
+  height: 185px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-info { padding: 17px; }
+
+.product-info h3 { font-size: 16px; }
+
+.product-info p {
+  color: var(--gray);
+  font-size: 12px;
+  min-height: 40px;
+  margin: 7px 0 13px;
+}
+
+.product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--orange);
+}
+
+.add {
+  border: 1px solid var(--orange);
+  background: transparent;
+  color: var(--orange);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.add:hover {
+  background: var(--orange);
+  color: #111;
+}
+
+.no-results {
+  grid-column: 1/-1;
+  text-align: center;
+  color: var(--gray);
+  padding: 30px;
+}
+
+/* NOSOTROS */
+
+.about {
+  background: #151515;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.about-image {
+  min-height: 350px;
+  border-radius: 18px;
+  background: url("https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1000&q=85") center/cover;
+}
+
+.about-copy h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.1;
+  margin: 15px 0;
+}
+
+.about-copy p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* CONTACTO */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.contact-card {
+  background: var(--card);
+  padding: 25px;
+  border: 1px solid #333;
+  border-radius: 15px;
+}
+
+.contact-card .icon {
+  font-size: 28px;
+  color: var(--orange);
+}
+
+.contact-card h3 { margin: 10px 0; }
+
+.contact-card p {
+  color: var(--gray);
+  font-size: 13px;
+}
+
+footer {
+  padding: 25px 0;
+  border-top: 1px solid #292929;
+  color: #999;
+  font-size: 12px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* AVISO */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  padding: 13px 18px;
+  background: white;
+  color: #111;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  display: none;
+  z-index: 30;
+  max-width: 90%;
+}
+
+.toast.show { display: block; }
+
+@media (max-width: 900px) {
+  .category-grid { grid-template-columns: repeat(3, 1fr); }
+  .products { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { gap: 12px; }
+}
+
+@media (max-width: 650px) {
+  .menu-toggle { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    background: #111;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links.open { display: flex; }
+  .nav .nav-cta { display: none; }
+
+  .hero { min-height: 560px; }
+  .hero-content { padding: 65px 0; }
+
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
+  .category:last-child { grid-column: 1/-1; }
+
+  .products { gap: 10px; }
+  .product img { height: 130px; }
+  .product-info { padding: 12px; }
+  .product-info h3 { font-size: 14px; }
+
+  .about-grid { grid-template-columns: 1fr; }
+  .about-image { min-height: 240px; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="container">
+    <a href="#inicio" class="logo">♨ SABOR <span>URBANO</span>
+      <small>BURGER & GRILL</small>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio">Inicio</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#menu">Menú</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <a href="#pedido" class="btn btn-outline nav-cta">◉ Pedir ahora</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-content">
+      <div class="eyebrow">Bienvenido a una nueva experiencia</div>
+      <h1>SABOR <span>URBANO</span></h1>
+      <h2>Más que comida, es una <span class="accent">experiencia.</span></h2>
+      <p>Hamburguesas artesanales, alitas irresistibles y pizzas para compartir. Ingredientes frescos y sabor urbano en cada bocado.</p>
+
+      <div class="hero-buttons">
+        <a href="#menu" class="btn">Explorar menú →</a>
+        <a href="#pedido" class="btn btn-outline">◉ Pedir por WhatsApp</a>
+      </div>
+
+      <div class="features">
+        <span>✦ Ingredientes frescos</span>
+        <span>✦ Preparado al momento</span>
+        <span>✦ Sabor garantizado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories" id="categorias">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">Elige tu antojo</div>
+      <h2>Nuestras categorías</h2>
+      <p>Descubre tu próximo favorito.</p>
+    </div>
+
+    <div class="category-grid">
+      <a href="#menu" class="category" data-category="Hamburguesas">
+        <div><h3>Hamburguesas</h3><p>Ver menú →</p></div>
+      </a>
+      <a href="#menu" class="category" data-category="Alitas">
+        <div><h3>Alitas</h3><p>Ver menú →</p></div>
+      </a>
+      <a href="#menu" class="category" data-category="Pizzas">
+        <div><h3>Pizzas</h3><p>Ver menú →</p></div>
+      </a>
+      <a href="#menu" class="category" data-category="Entradas">
+        <div><h3>Entradas</h3><p>Ver menú →</p></div>
+      </a>
+      <a href="#menu" class="category" data-category="Bebidas">
+        <div><h3>Bebidas</h3><p>Ver menú →</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">Los favoritos de la casa</div>
+      <h2>El menú <span class="accent">urbano</span></h2>
+      <p>Productos y precios de ejemplo, personalizables para cada negocio.</p>
+    </div>
+
+    <div class="menu-tools">
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="Todos">Todo</button>
+        <button class="filter" data-filter="Hamburguesas">Hamburguesas</button>
+        <button class="filter" data-filter="Alitas">Alitas</button>
+        <button class="filter" data-filter="Pizzas">Pizzas</button>
+        <button class="filter" data-filter="Entradas">Entradas</button>
+        <button class="filter" data-filter="Bebidas">Bebidas</button>
+      </div>
+
+      <input id="search" type="search" placeholder="Buscar platos..." aria-label="Buscar platos">
+    </div>
+
+    <div class="products" id="products"></div>
+  </div>
+</section>
+
+<section class="about" id="nosotros">
+  <div class="container about-grid">
+    <div class="about-image" role="img" aria-label="Hamburguesa artesanal"></div>
+
+    <div class="about-copy">
+      <div class="eyebrow">Nuestra esencia</div>
+      <h2>Hecho con pasión.<br><span class="accent">Servido con actitud.</span></h2>
+      <p>En Sabor Urbano creemos que una buena comida reúne a las personas. Por eso combinamos ingredientes de calidad, recetas con personalidad y atención cercana.</p>
+      <p>Ya sea una cena con amigos o un antojo de media tarde, tenemos algo especial para disfrutar.</p>
+      <a href="#menu" class="btn">Descubrir el menú →</a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">Estamos para atenderte</div>
+      <h2>¿Listo para <span class="accent">comer rico?</span></h2>
+      <p>Contáctanos para consultar disponibilidad y hacer tu pedido.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card" id="pedido">
+        <div class="icon">◉</div>
+        <h3>Haz tu pedido</h3>
+        <p>Escríbenos por WhatsApp y consulta por tus favoritos.</p><br>
+        <button class="btn" id="whatsappButton">Pedir por WhatsApp →</button>
+      </div>
+
+      <div class="contact-card">
+        <div class="icon">◷</div>
+        <h3>Horario de atención</h3>
+        <p>Lunes a domingo</p>
+        <p>12:00 p. m. – 11:00 p. m.</p>
+        <p><small>Horario ficticio de demostración.</small></p>
+      </div>
+
+      <div class="contact-card">
+        <div class="icon">⌖</div>
+        <h3>Ubicación</h3>
+        <p>Dirección por confirmar</p>
+        <p>Perú</p>
+        <p><small>Reemplaza por la ubicación real del negocio.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="logo">SABOR <span>URBANO</span><small>BURGER & GRILL</small></div>
+    <p>© <span id="year"></span> Sabor Urbano. Proyecto de demostración.</p>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// CAMBIA ESTE VALOR POR EL NÚMERO DEL NEGOCIO.
+// Formato: código de país + número, sin +, espacios ni guiones.
+// Ejemplo ficticio de formato: 51987654321
+const WHATSAPP_NUMBER = "";
+
+const dishes = [
+  {
+    name: "Hamburguesa Clásica",
+    category: "Hamburguesas",
+    price: 16.90,
+    description: "Carne a la parrilla, queso, lechuga, tomate y salsa especial.",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Doble Urbana",
+    category: "Hamburguesas",
+    price: 22.90,
+    description: "Doble carne, doble queso y cebolla caramelizada.",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Alitas BBQ",
+    category: "Alitas",
+    price: 14.90,
+    description: "Alitas doradas bañadas en una deliciosa salsa BBQ.",
+    image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Alitas Picantes",
+    category: "Alitas",
+    price: 15.90,
+    description: "Crujientes alitas con un toque picante.",
+    image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Pizza Pepperoni",
+    category: "Pizzas",
+    price: 22.90,
+    description: "Masa artesanal, mozzarella y pepperoni.",
+    image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Pizza Urbana",
+    category: "Pizzas",
+    price: 25.90,
+    description: "Una mezcla generosa de ingredientes y queso.",
+    image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Papas Urbanas",
+    category: "Entradas",
+    price: 9.90,
+    description: "Papas crujientes con salsa especial de la casa.",
+    image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Aros de cebolla",
+    category: "Entradas",
+    price: 8.90,
+    description: "Dorados, crujientes y perfectos para compartir.",
+    image: "https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Gaseosa helada",
+    category: "Bebidas",
+    price: 4.50,
+    description: "Una bebida fría para acompañar tu comida.",
+    image: "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    name: "Limonada",
+    category: "Bebidas",
+    price: 6.90,
+    description: "Limonada fresca, preparada al momento.",
+    image: "https://images.unsplash.com/photo-1513558161293-cdad765edc14?auto=format&fit=crop&w=700&q=80"
+  }
+];
+
+let activeFilter = "Todos";
+
+const products = document.getElementById("products");
+const search = document.getElementById("search");
+const toast = document.getElementById("toast");
+
+function formatPrice(price) {
+  return "S/ " + price.toFixed(2);
+}
+
+function renderProducts() {
+  const term = search.value.trim().toLowerCase();
+
+  const filtered = dishes.filter(dish => {
+    const matchesCategory =
+      activeFilter === "Todos" || dish.category === activeFilter;
+
+    const matchesSearch =
+      (dish.name + " " + dish.category + " " + dish.description)
+        .toLowerCase()
+        .includes(term);
+
+    return matchesCategory && matchesSearch;
+  });
+
+  if (!filtered.length) {
+    products.innerHTML = '<p class="no-results">No encontramos platos con esa búsqueda.</p>';
+    return;
+  }
+
+  products.innerHTML = filtered.map(dish => `
+    <article class="product">
+      <img src="${dish.image}" alt="${dish.name}" loading="lazy">
+      <div class="product-info">
+        <h3>${dish.name}</h3>
+        <p>${dish.description}</p>
+        <div class="product-bottom">
+          <span class="price">${formatPrice(dish.price)}</span>
+          <button class="add" data-order="${dish.name}" aria-label="Consultar ${dish.name}">+</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
+
+function orderOnWhatsApp(message) {
+  if (!WHATSAPP_NUMBER) {
+    showToast("Esta es una demo. Configura el número de WhatsApp en el código.");
+    return;
+  }
+
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+document.getElementById("filters").addEventListener("click", event => {
+  const button = event.target.closest("[data-filter]");
+  if (!button) return;
+
+  activeFilter = button.dataset.filter;
+
+  document.querySelectorAll(".filter").forEach(filter => {
+    filter.classList.toggle("active", filter === button);
+  });
+
+  renderProducts();
+});
+
+document.querySelectorAll("[data-category]").forEach(link => {
+  link.addEventListener("click", () => {
+    activeFilter = link.dataset.category;
+
+    document.querySelectorAll(".filter").forEach(filter => {
+      filter.classList.toggle("active", filter.dataset.filter === activeFilter);
+    });
+
+    renderProducts();
+  });
+});
+
+search.addEventListener("input", renderProducts);
+
+products.addEventListener("click", event => {
+  const button = event.target.closest("[data-order]");
+  if (!button) return;
+
+  const dish = dishes.find(item => item.name === button.dataset.order);
+
+  orderOnWhatsApp(
+    `Hola, quisiera consultar por ${dish.name} (${formatPrice(dish.price)}).`
+  );
+});
+
+document.getElementById("whatsappButton").addEventListener("click", () => {
+  orderOnWhatsApp("Hola, quisiera consultar el menú y hacer un pedido.");
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => navLinks.classList.remove("open"));
+});
+
+renderProducts();
+</script>
+</body>
+</html>
+```
